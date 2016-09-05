@@ -13,7 +13,6 @@ class Command(BaseCommand):
 		parser.add_argument('--navfile', nargs=1, type=str)
 
 	def handle(self, *args, **options):
-		print(options)
 		AMCID = options['amcid'][0]
 		AMFINUMBER = options['amfinumber'][0]
 		MFNAME = options['mfname'][0]
