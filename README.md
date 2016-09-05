@@ -30,3 +30,10 @@ To initialize the PostreSQL data:
 ```
 createdb -O <username> mfnavigator
 ```
+
+2. Then run
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+```
