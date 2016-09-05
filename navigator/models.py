@@ -17,7 +17,7 @@ class MutualFund(models.Model):
     amfiid = models.ForeignKey(AMC)
 
     def __str__(self):
-        return self.mfname + '(' + self.amfisymbol + ')'
+        return self.mfname + ' (' + self.amfisymbol + ')'
 
 class MutualFundNAV(models.Model):
     """Class to store each NAV entry."""
