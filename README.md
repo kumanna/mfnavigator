@@ -23,7 +23,7 @@ sudo apt-get install postgresql postgresql-client
 
 ## The database
 
-To initialize the PostreSQL data:
+To initialize the PostgreSQL data:
 
 1. Create the project database `mfnavigator`. On Debian or Ubuntu, you can do this by:
 
