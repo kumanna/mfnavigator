@@ -2,6 +2,7 @@ from django.db import models
 
 class AMC(models.Model):
     amfiid = models.IntegerField(unique=True)
+    amcname = models.CharField(max_length=100,default='Unnamed AMC')
 
     def __str__(self):
         return str(self.amfiid)
