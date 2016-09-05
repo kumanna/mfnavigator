@@ -18,6 +18,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'navigator.apps.NavigatorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
