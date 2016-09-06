@@ -37,3 +37,18 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 
 ```
+
+3. Now, you need to create the AMCs. Currently, this has been done
+manually and will be automated soon.
+
+4. To import NAVs to the database, you can run this:
+
+```
+python3 manage.py importnavs --amcid <amcid> --amfinumber <mfnumber> --mfname <mfname> --navfile <amfi_nav_file>
+```
+
+For example, for Birla Sun Life Frontline Equity - Growth, we can run
+```
+python3 manage.py importnavs --amcid 3 --amfinumber 103174 --mfname "Birla Sun Life Frontline Equity Fund-Growth" --navfile BSLNAVs.txt
+```
+where `BSLNAVs.txt` is downloaded from the AMFI website.
