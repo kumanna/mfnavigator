@@ -1,13 +1,14 @@
 from django.db import models
+from bakery.models import BuildableModel
 
-class AMC(models.Model):
+class AMC(BuildableModel):
     amfiid = models.IntegerField(unique=True)
     amcname = models.CharField(max_length=100,default='Unnamed AMC')
 
     def __str__(self):
         return str(self.amfiid)
 
-class MutualFund(models.Model):
+class MutualFund(BuildableModel):
     """
     Basic mutual fund. We store the AMFI number as well as the six
     digit AMFI symbol number currently.
