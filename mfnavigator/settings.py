@@ -125,5 +125,6 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-BAKERY_VIEWS = ('navigator.views.AMCListView',)
+BAKERY_VIEWS = ('navigator.views.AMCListView',
+				'navigator.views.MutualFundStaticJSONView',)
 BUILD_DIR = BASE_DIR + '/bakery-build'

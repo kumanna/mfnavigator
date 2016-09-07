@@ -28,3 +28,7 @@ class MutualFundNAV(models.Model):
 
     def __str__(self):
         return "%s, %s, %s" % (self.mf.amfisymbol, str(self.date), str(self.nav))
+
+class MutualFundStaticJSON(MutualFund):
+	class Meta:
+		proxy = True
