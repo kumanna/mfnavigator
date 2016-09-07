@@ -3,6 +3,9 @@
 	{
 		"date" : "{{ nav.date|date:"Y-m-d" }}",
 		"nav" : "{{ nav.nav }}"
+    {% if forloop.last %}
+	}
+    {% else %}
 	},
-{% endfor %}
+    {% endif %}{% endfor %}
 ]

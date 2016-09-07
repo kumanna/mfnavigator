@@ -29,3 +29,18 @@ class LastYearStaticJSONView(BuildableDetailView):
 		last_year = today - datetime.timedelta(days=365)
 		context['navvals'] = obj.mutualfundnav_set.filter(date__range = (str(last_year), str(today))).order_by('date')
 		return context
+
+class LastYearViewer(BuildableListView):
+	model = MutualFund
+	template_name ='navigator/allmf_1y.html'
+	path = os.path.join(mfnavigator.settings.BUILD_DIR, '1y-navs')
+	os.path.exists(path) or os.makedirs(path)
+	build_path = os.path.join(path, 'index.html')
+
+	def get_url(self, obj):
+		return '/1y-navs/'
+
+	def get_context_data(self, **kwargs):
+		context = super(LastYearViewer, self).get_context_data(**kwargs)
+		context['defaultmf'] = '103174'
+		return context
