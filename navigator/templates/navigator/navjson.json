@@ -1,0 +1,8 @@
+[
+{% for nav in object.mutualfundnav_set.all %}
+	{
+		"date" : "{{ nav.date }}",
+		"nav" : "{{ nav.nav }}"
+	},
+{% endfor %}
+]

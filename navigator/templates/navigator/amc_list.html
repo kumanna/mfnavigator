@@ -1,0 +1,12 @@
+<html>
+	<body>
+<h1>AMCs</h1>
+<ul>
+	{% for amc in object_list %}
+    <li>{{ amc.amcname }}</li>
+	{% empty %}
+    <li>No AMCs yet.</li>
+	{% endfor %}
+</ul>
+	</body>
+</html>
