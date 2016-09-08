@@ -126,6 +126,6 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 BAKERY_VIEWS = ('navigator.views.AMCListView',
-				'navigator.views.LastYearStaticJSONView',
-				'navigator.views.LastYearViewer')
+				'navigator.views.Last1YearStaticJSONView',
+				'navigator.views.Last1YearViewer')
 BUILD_DIR = BASE_DIR + '/bakery-build'
