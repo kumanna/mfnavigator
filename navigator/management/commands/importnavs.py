@@ -16,6 +16,7 @@ class Command(BaseCommand):
 		AMCID = options['amcid'][0]
 		AMFINUMBER = options['amfinumber'][0]
 		MFNAME = options['mfname'][0]
+		MFNAME = MFNAME.replace('"', '')
 		NAVFILE = options['navfile'][0]
 
 		with open(NAVFILE, 'r') as f:
