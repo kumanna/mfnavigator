@@ -66,7 +66,7 @@
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					{% for mf in object_list %}
-					<li><a href="javascript:makechart('./{{ mf.amfisymbol }}.json', {{ mf.mfname }}, 'chart')">{{ mf.mfname }}</a></li>
+					<li><a href="javascript:makechart('./{{ mf.amfisymbol }}.json', '{{ mf.mfname }}', 'chart')">{{ mf.mfname }}</a></li>
 					{% endfor %}
 				</ul>
 			</div>
