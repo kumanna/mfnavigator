@@ -27,19 +27,31 @@ class LastYearsStaticJSONView(BuildableDetailView,metaclass=abc.ABCMeta):
 		context = super(LastYearsStaticJSONView, self).get_context_data(**kwargs)
 		obj = context['object']
 		today = datetime.date.today()
-		last_year = today - datetime.timedelta(days=365)
-		context['navvals'] = obj.mutualfundnav_set.filter(date__range = (str(last_year), str(today))).order_by('date')
+		last_year = today - datetime.timedelta(days=365*self.n)
+		context['navvals'] = obj.mutualfundnav_set.filter(date__range = (str(last_year), str(today))).order_by('date')[::self.n]
 		return context
 
 class Last1YearStaticJSONView(LastYearsStaticJSONView):
 	n = 1
+
+class Last3YearStaticJSONView(LastYearsStaticJSONView):
+	n = 3
+
+class Last5YearStaticJSONView(LastYearsStaticJSONView):
+	n = 5
+
+class Last7YearStaticJSONView(LastYearsStaticJSONView):
+	n = 7
+
+class Last10YearStaticJSONView(LastYearsStaticJSONView):
+	n = 10
 
 class LastYearsViewer(BuildableListView,metaclass=abc.ABCMeta):
 	model = MutualFund
 	n = 0
 
 	def __init__(self):
-		self.template_name = 'navigator/allmf_%dy.html' % self.n
+		self.template_name = 'navigator/allmf_1y.html'
 		self.path = os.path.join(mfnavigator.settings.BUILD_DIR, '%dy-navs' % self.n)
 		os.path.exists(self.path) or os.makedirs(self.path)
 		self.build_path = os.path.join(self.path, 'index.html')
@@ -54,3 +66,15 @@ class LastYearsViewer(BuildableListView,metaclass=abc.ABCMeta):
 
 class Last1YearViewer(LastYearsViewer):
 	n = 1
+
+class Last3YearViewer(LastYearsViewer):
+	n = 3
+
+class Last5YearViewer(LastYearsViewer):
+	n = 5
+
+class Last7YearViewer(LastYearsViewer):
+	n = 7
+
+class Last10YearViewer(LastYearsViewer):
+	n = 10
