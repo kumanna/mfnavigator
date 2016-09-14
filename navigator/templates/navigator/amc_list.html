@@ -62,34 +62,34 @@
 		</div>
 		<div class="container">
 			<div class="col-lg-6">
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Choose AMC
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					{% for amc in object_list %}
-					<li><a href="#">{{ amc.amcname }}</a></li>
-					{% empty %}
-					<li>No AMCs yet.</li>
-					{% endfor %}
-				</ul>
-			</div>
+				<h3>Fund 1</h3>
+				<form>
+					<select class="form-control" id="amc1">
+						{% for amc in object_list %}
+						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
+						{% empty %}
+						<option>No AMCs yet.</option>
+						{% endfor %}
+					</select>
+					<select class="form-control" id="fund1" disabled>
+						<option>No Funds yet.</option>
+					</select>
+				</form>
 			</div>
 			<div class="col-lg-6">
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Choose AMC
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-					{% for amc in object_list %}
-					<li><a href="#">{{ amc.amcname }}</a></li>
-					{% empty %}
-					<li>No AMCs yet.</li>
-					{% endfor %}
-				</ul>
-			</div>
+				<h3>Fund 2</h3>
+				<form>
+					<select class="form-control" id="amc2">
+						{% for amc in object_list %}
+						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
+						{% empty %}
+						<option>No AMCs yet.</option>
+						{% endfor %}
+					</select>
+					<select class="form-control" id="fund2" disabled>
+						<option>No Funds yet.</option>
+					</select>
+				</form>
 			</div>
 		</div>
     </body>
