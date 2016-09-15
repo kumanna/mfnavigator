@@ -126,6 +126,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 BAKERY_VIEWS = ('navigator.views.AMCListView',
+				'navigator.views.MFListViewJSON',
 				'navigator.views.Last1YearStaticJSONView',
 				'navigator.views.Last1YearViewer',
 				'navigator.views.Last3YearStaticJSONView',

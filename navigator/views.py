@@ -10,6 +10,27 @@ class AMCListView(BuildableListView):
 	template_name = 'navigator/amc_list.html'
 	build_path = 'amcs.html'
 
+class MFListViewJSON(BuildableDetailView):
+	model = AMC
+	template_name = 'navigator/mfs.json'
+
+	def __init__(self):
+		super(MFListViewJSON, self).__init__()
+
+	def get_url(self, obj):
+		return '/%s.json' % obj.amfiid
+
+	def get_build_path(self, obj):
+		path = os.path.join(mfnavigator.settings.BUILD_DIR)
+		os.path.exists(path) or os.makedirs(path)
+		return os.path.join(path, str(obj.amfiid) + '.json')
+
+	def get_context_data(self, **kwargs):
+		context = super(MFListViewJSON, self).get_context_data(**kwargs)
+		obj = context['object']
+		context['mflist'] = obj.mutualfund_set.all()
+		return context
+
 class LastYearsStaticJSONView(BuildableDetailView,metaclass=abc.ABCMeta):
 	model = MutualFund
 	template_name = 'navigator/navjson.json'
