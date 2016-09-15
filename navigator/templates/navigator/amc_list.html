@@ -59,16 +59,16 @@
 			 };
 			 makechart('./1y-navs/103174.json', 'Birla Sun Life Frontline Equity-Growth', 'chart')
 
-			 populate_funds = function(idname) {
-				 $(idname).prop("disabled", false)
-				 };
+			 populate_funds = function(amcidname, fundidname) {
+				 $(fundidname).prop("disabled", false)
+			 };
 			</script>
 		</div>
 		<div class="container">
 			<div class="col-lg-6">
 				<h3>Fund 1</h3>
 				<form>
-					<select class="form-control" id="amc1" onchange='populate_funds("#fund1")'>
+					<select class="form-control" id="amc1" onchange='populate_funds("#amc1", "#fund1")'>
 						{% for amc in object_list %}
 						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
 						{% empty %}
@@ -83,7 +83,7 @@
 			<div class="col-lg-6">
 				<h3>Fund 2</h3>
 				<form>
-					<select class="form-control" id="amc2" onchange='populate_funds("#fund2")'>
+					<select class="form-control" id="amc2" onchange='populate_funds("#amc2", "#fund2")'>
 						{% for amc in object_list %}
 						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
 						{% empty %}
