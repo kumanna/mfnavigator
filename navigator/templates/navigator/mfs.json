@@ -1,0 +1,11 @@
+[
+{% for mf in mflist %}
+	{
+		"name" : "{{ mf.mfname }}",
+		"amfiid" : "{{ mf.amfiid }}",
+    {% if forloop.last %}
+	}
+    {% else %}
+	},
+    {% endif %}{% endfor %}
+]
