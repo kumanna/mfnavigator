@@ -2,7 +2,7 @@
 {% for mf in mflist %}
 	{
 		"name" : "{{ mf.mfname }}",
-		"amfiid" : "{{ mf.amfiid }}",
+		"amfisymbol" : "{{ mf.amfisymbol }}"
     {% if forloop.last %}
 	}
     {% else %}
