@@ -1,108 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>MF return viewer</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../../favicon.ico">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>MF return viewer</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
 
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-		<style>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+	<style>
          @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
          html {
              font-family: 'Source Sans Pro';
              font-size: 0.7em;
          }
-		</style>
-		<script src="https://d3js.org/d3.v4.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.js"></script>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.css" rel="stylesheet" type="text/css"/>
+	</style>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.10.1/metricsgraphics.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-		<div class="container">
-			<div id="chart"></div>
-			<script>
-			 makechart = function(charturl, mfname, chartid) {
-				 d3.json(charturl, function(data) {
-					 data = MG.convert.date(data, 'date');
-					 data = MG.convert.number(data, 'nav');
-					 MG.data_graphic({
-						 title: "Performance of " + mfname,
-						 description: "NAV of " + mfname,
-						 data: data,
-						 width: 600,
-						 height: 375,
-						 target: "#" + chartid,
-						 x_accessor: "date",
-						 y_accessor: "nav",
-						 area: false,
-						 transition_on_update: false,
-					 });
-				 });
-			 };
-			 makechart('./1y-navs/103174.json', 'Birla Sun Life Frontline Equity-Growth', 'chart')
+	<div class="container">
+	    <div id="chart"></div>
+	    <script>
+	     makechart = function(charturl, mfname, chartid) {
+		 d3.json(charturl, function(data) {
+		     data = MG.convert.date(data, 'date');
+		     data = MG.convert.number(data, 'nav');
+		     MG.data_graphic({
+			 title: "Performance of " + mfname,
+			 description: "NAV of " + mfname,
+			 data: data,
+			 width: 600,
+			 height: 375,
+			 target: "#" + chartid,
+			 x_accessor: "date",
+			 y_accessor: "nav",
+			 area: false,
+			 transition_on_update: false,
+		     });
+		 });
+	     };
+	     makechart('./1y-navs/103174.json', 'Birla Sun Life Frontline Equity-Growth', 'chart')
 
-			 populate_funds = function(amcidname, fundidname) {
-			     $(fundidname).prop("disabled", false);
-			     /* First clear the list */
-			     $(fundidname).find('option').remove().end();
-			     /* Finally read the funds from the file */
-			     $.getJSON(String($(amcidname).val()) + '.json', function(data) {
-			         $.each(data, function(key, value) {
-			             $(fundidname).append($('<option></option>').val(value.amfisymbol).html(value.name));
-			         });
-			     });
-			 };
-			</script>
-		</div>
-		<div class="container">
-			<div class="col-lg-6">
-				<h3>Fund 1</h3>
-				<form>
-					<select class="form-control" id="amc1" onchange='populate_funds("#amc1", "#fund1")'>
-						{% for amc in object_list %}
-						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
-						{% empty %}
-						<option>No AMCs yet.</option>
-						{% endfor %}
-					</select>
-					<select class="form-control" id="fund1" disabled>
-						<option>No Funds yet.</option>
-					</select>
-				</form>
-			</div>
-			<div class="col-lg-6">
-				<h3>Fund 2</h3>
-				<form>
-					<select class="form-control" id="amc2" onchange='populate_funds("#amc2", "#fund2")'>
-						{% for amc in object_list %}
-						<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
-						{% empty %}
-						<option>No AMCs yet.</option>
-						{% endfor %}
-					</select>
-					<select class="form-control" id="fund2" disabled>
-						<option>No Funds yet.</option>
-					</select>
-				</form>
-			</div>
-		</div>
+	     populate_funds = function(amcidname, fundidname) {
+		 $(fundidname).prop("disabled", false);
+		 /* First clear the list */
+		 $(fundidname).find('option').remove().end();
+		 /* Finally read the funds from the file */
+		 $.getJSON(String($(amcidname).val()) + '.json', function(data) {
+		     $.each(data, function(key, value) {
+			 $(fundidname).append($('<option></option>').val(value.amfisymbol).html(value.name));
+		     });
+		 });
+	     };
+	    </script>
+	</div>
+	<div class="container">
+	    <div class="col-lg-6">
+		<h3>Fund 1</h3>
+		<form>
+		    <select class="form-control" id="amc1" onchange='populate_funds("#amc1", "#fund1")'>
+			{% for amc in object_list %}
+			<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
+			{% empty %}
+			<option>No AMCs yet.</option>
+			{% endfor %}
+		    </select>
+		    <select class="form-control" id="fund1" disabled>
+			<option>No Funds yet.</option>
+		    </select>
+		</form>
+	    </div>
+	    <div class="col-lg-6">
+		<h3>Fund 2</h3>
+		<form>
+		    <select class="form-control" id="amc2" onchange='populate_funds("#amc2", "#fund2")'>
+			{% for amc in object_list %}
+			<option value="{{ amc.amfiid }}">{{ amc.amcname }}</option>
+			{% empty %}
+			<option>No AMCs yet.</option>
+			{% endfor %}
+		    </select>
+		    <select class="form-control" id="fund2" disabled>
+			<option>No Funds yet.</option>
+		    </select>
+		</form>
+	    </div>
+	</div>
     </body>
 </html>
