@@ -104,5 +104,19 @@
 		</form>
 	    </div>
 	</div>
+	<script>
+	 /* We'll actually click the options */
+	 initLists = function(listname, value) {
+		 $(listname).change(function () {
+			 var data= $(this).val();
+		 });
+
+		 $(listname)
+			 .val(value)
+			 .trigger('change');
+	 };
+	 initLists('#amc1', '3');
+	 initLists('#amc2', '27');
+	</script>
     </body>
 </html>
