@@ -60,15 +60,15 @@
 			 makechart('./1y-navs/103174.json', 'Birla Sun Life Frontline Equity-Growth', 'chart')
 
 			 populate_funds = function(amcidname, fundidname) {
-				 $(fundidname).prop("disabled", false);
-			         /* First clear the list */
-			         $(fundidname).find('option').remove().end();
-			         /* Finally read the funds from the file */
-			         $.getJSON(String($(amcidname).val()) + '.json', function(data) {
-			           $.each(data, function(key, value) {
+			     $(fundidname).prop("disabled", false);
+			     /* First clear the list */
+			     $(fundidname).find('option').remove().end();
+			     /* Finally read the funds from the file */
+			     $.getJSON(String($(amcidname).val()) + '.json', function(data) {
+			         $.each(data, function(key, value) {
 			             $(fundidname).append($('<option></option>').val(value.amfisymbol).html(value.name));
-			           });
 			         });
+			     });
 			 };
 			</script>
 		</div>
