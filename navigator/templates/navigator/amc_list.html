@@ -105,9 +105,17 @@
 		 $(listname)
 			 .val(value1)
 			 .trigger('change');
+
+		 $(fundname).change(function () {
+			 var data= $(this).val();
+		 });
+
+		 $(fundname)
+			 .val(value2)
+			 .trigger('change');
 	 };
 	 initLists('#amc1', '#fund1', '3', '103174');
-	 initLists('#amc2', '#fund2', '27', '118559');
+	 initLists('#amc2', '#fund2', '27', '100471');
 	 makechart(1, "#chart");
 	</script>
     </body>
