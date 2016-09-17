@@ -40,23 +40,26 @@
 	    <div id="chart1"></div>
 		<div id="legend"></div>
 	    <script>
-	     makechart = function(years, chartid) {
+	     makechart = function(chartid) {
 			 /* Chart goes here. */
 			 var fund1 = $('#fund1').val();
 			 var fund2 = $('#fund2').val();
 			 if (fund1 < 0 || fund2 < 0) return;
 			 var fund1name = $('#fund1 option:selected').text();
 			 var fund2name = $('#fund2 option:selected').text();
+
+			 years = String($('#duration').val());
+
 			 data_combined = [];
 			 $.ajax({
-				 url: String(years) + 'y-navs/' + fund1 + '.json',
+				 url: years + 'y-navs/' + fund1 + '.json',
 				 async: false,
 				 dataType: 'json',
 				 success: function(data) {
 					 data_combined[0] = data;
 				 }});
 			 $.ajax({
-				 url: String(years) + 'y-navs/' + fund2 + '.json',
+				 url: years + 'y-navs/' + fund2 + '.json',
 				 async: false,
 				 dataType: 'json',
 				 success: function(data) {
@@ -125,8 +128,14 @@
 			<option>No AMCs yet.</option>
 			{% endfor %}
 		    </select>
-		    <select class="form-control" id="fund1" disabled onchange='makechart(1, "chart1")'>
+		    <select class="form-control" id="fund1" disabled onchange='makechart("chart1")'>
 			<option value="-1">No Funds yet.</option>
+		    </select>
+		    <select class="form-control" id="duration" onchange='makechart("chart1")'>
+				<option value="1">1 year</option>
+				<option value="3">3 year</option>
+				<option value="5">5 year</option>
+				<option value="7">7 year</option>
 		    </select>
 		</form>
 	    </div>
@@ -140,7 +149,7 @@
 			<option>No AMCs yet.</option>
 			{% endfor %}
 		    </select>
-		    <select class="form-control" id="fund2" disabled onchange='makechart(1, "chart1")'>
+		    <select class="form-control" id="fund2" disabled onchange='makechart("chart1")'>
 			<option value="-1">No Funds yet.</option>
 		    </select>
 		</form>
@@ -167,7 +176,7 @@
 	 };
 	 initLists('#amc1', '#fund1', '3', '103174');
 	 initLists('#amc2', '#fund2', '27', '100471');
-	 makechart(1, "chart1");
+	 makechart("chart1");
 	</script>
     </body>
 </html>
