@@ -38,12 +38,15 @@
     <body>
 	<div class="container">
 	    <div id="chart1"></div>
+		<div id="legend"></div>
 	    <script>
 	     makechart = function(years, chartid) {
 			 /* Chart goes here. */
 			 var fund1 = $('#fund1').val();
 			 var fund2 = $('#fund2').val();
 			 if (fund1 < 0 || fund2 < 0) return;
+			 var fund1name = $('#fund1 option:selected').text();
+			 var fund2name = $('#fund2 option:selected').text();
 			 data_combined = [];
 			 $.ajax({
 				 url: String(years) + 'y-navs/' + fund1 + '.json',
@@ -64,10 +67,22 @@
 				 data_combined[i] = MG.convert.date(data_combined[i], 'date');
 				 data_combined[i] = MG.convert.number(data_combined[i], 'nav');
 			 }
+
+			 /* Do the 10,000 rupee conversion */
+			 function normalize_navs_lumpsum(data) {
+				 factor = 10000.0 / data[0]['nav'];
+				 for (var i = 0; i < data.length; i++) {
+					 data[i]['nav'] = data[i]['nav'] * factor;
+				 }
+				 return data;
+			 };
+			 data_combined[0] = normalize_navs_lumpsum(data_combined[0]);
+			 data_combined[1] = normalize_navs_lumpsum(data_combined[1]);
+
 			 var d = [[{'date': new Date('2015-03-05T21:00:00Z'), 'nav': 12000}], [{'date': new Date('2014-03-05T21:00:00Z'), 'nav': 10000}]];
 			 MG.data_graphic({
-				 title: "Performance of ",
-				 description: "NAV of ",
+				 title: "Rs. 10,000 in " + fund1name + ', ' + fund2name,
+				 description: "Growth of value of Rs. 10,000",
 				 data: data_combined,
 				 width: 600,
 				 height: 375,
@@ -75,6 +90,8 @@
 				 x_accessor: "date",
 				 y_accessor: "nav",
 				 transition_on_update: false,
+				 legend: [fund1name, fund2name],
+				 legend_target: '#legend'
 			 });
 	     };
 
