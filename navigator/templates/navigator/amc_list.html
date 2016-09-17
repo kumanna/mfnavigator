@@ -37,12 +37,46 @@
     </head>
     <body>
 	<div class="container">
-	    <div id="chart"></div>
+	    <div id="chart1"></div>
 	    <script>
 	     makechart = function(years, chartid) {
 			 /* Chart goes here. */
+			 var fund1 = $('#fund1').val();
+			 var fund2 = $('#fund2').val();
+			 if (fund1 < 0 || fund2 < 0) return;
+			 data_combined = [];
+			 $.ajax({
+				 url: String(years) + 'y-navs/' + fund1 + '.json',
+				 async: false,
+				 dataType: 'json',
+				 success: function(data) {
+					 data_combined[0] = data;
+				 }});
+			 $.ajax({
+				 url: String(years) + 'y-navs/' + fund2 + '.json',
+				 async: false,
+				 dataType: 'json',
+				 success: function(data) {
+					 data_combined[1] = data;
+				 }});
+
+			 for (var i = 0; i < data_combined.length; i++) {
+				 data_combined[i] = MG.convert.date(data_combined[i], 'date');
+				 data_combined[i] = MG.convert.number(data_combined[i], 'nav');
+			 }
+			 var d = [[{'date': new Date('2015-03-05T21:00:00Z'), 'nav': 12000}], [{'date': new Date('2014-03-05T21:00:00Z'), 'nav': 10000}]];
+			 MG.data_graphic({
+				 title: "Performance of ",
+				 description: "NAV of ",
+				 data: data_combined,
+				 width: 600,
+				 height: 375,
+				 target: "#" + chartid,
+				 x_accessor: "date",
+				 y_accessor: "nav",
+				 transition_on_update: false,
+			 });
 	     };
-		 //	     makechart('./1y-navs/103174.json', 'Birla Sun Life Frontline Equity-Growth', 'chart')
 
 	     populate_funds = function(amcidname, fundidname) {
 			 $(fundidname).prop("disabled", false);
@@ -74,8 +108,8 @@
 			<option>No AMCs yet.</option>
 			{% endfor %}
 		    </select>
-		    <select class="form-control" id="fund1" disabled>
-			<option>No Funds yet.</option>
+		    <select class="form-control" id="fund1" disabled onchange='makechart(1, "chart1")'>
+			<option value="-1">No Funds yet.</option>
 		    </select>
 		</form>
 	    </div>
@@ -89,8 +123,8 @@
 			<option>No AMCs yet.</option>
 			{% endfor %}
 		    </select>
-		    <select class="form-control" id="fund2" disabled>
-			<option>No Funds yet.</option>
+		    <select class="form-control" id="fund2" disabled onchange='makechart(1, "chart1")'>
+			<option value="-1">No Funds yet.</option>
 		    </select>
 		</form>
 	    </div>
@@ -116,7 +150,7 @@
 	 };
 	 initLists('#amc1', '#fund1', '3', '103174');
 	 initLists('#amc2', '#fund2', '27', '100471');
-	 makechart(1, "#chart");
+	 makechart(1, "chart1");
 	</script>
     </body>
 </html>
