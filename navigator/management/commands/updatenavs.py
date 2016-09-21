@@ -12,15 +12,25 @@ class Command(BaseCommand):
         parser.add_argument('--amcid', nargs=1, type=int)
 
     def handle(self, *args, **options):
-        AMCID = options['amcid'][0]
-        mfs = AMC.objects.filter(amfiid=AMCID)[0]
+        if options['amcid']:
+            mflist = AMC.objects.filter(amfiid=options['amcid'][0])
+        else:
+            mflist = AMC.objects.all()
 
+        for mfs in mflist:
+            self.update_navs(mfs)
+
+    def update_navs(self, mfs):
+        AMCID = mfs.amfiid
         # Find the oldest _latest_ NAV date
         today = datetime.date.today()
         mindate = today
         minmf = None
         for mf in mfs.mutualfund_set.all():
-            latest_date = mf.mutualfundnav_set.order_by('-date')[0].date
+            navlist = mf.mutualfundnav_set.order_by('-date')
+            if len(navlist) < 1:
+                continue
+            latest_date = navlist[0].date
             if latest_date < mindate:
                 mindate = latest_date
                 minmf = mf.mfname
