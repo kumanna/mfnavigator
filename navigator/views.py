@@ -80,11 +80,6 @@ class LastYearsViewer(BuildableListView,metaclass=abc.ABCMeta):
 	def get_url(self, obj):
 		return '/%dy-navs/' % self.n
 
-	def get_context_data(self, **kwargs):
-		context = super(LastYearsViewer, self).get_context_data(**kwargs)
-		context['defaultmf'] = '103174'
-		return context
-
 class Last1YearViewer(LastYearsViewer):
 	n = 1
 
@@ -99,3 +94,19 @@ class Last7YearViewer(LastYearsViewer):
 
 class Last10YearViewer(LastYearsViewer):
 	n = 10
+
+class TopMFViewer(BuildableListView,metaclass=abc.ABCMeta):
+	model = MutualFund
+	n = 0
+
+	def __init__(self):
+		self.template_name = 'navigator/topmfs.html'
+		self.path = os.path.join(mfnavigator.settings.BUILD_DIR)
+		os.path.exists(self.path) or os.makedirs(self.path)
+		self.build_path = os.path.join(self.path, 'topmfs-%d.html' % self.n)
+
+	def get_url(self, obj):
+		return '/topmfs-%d.html' % self.n
+
+class TopMF1YearViewer(TopMFViewer):
+	n = 1
