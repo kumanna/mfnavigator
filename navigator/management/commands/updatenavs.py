@@ -52,8 +52,17 @@ class Command(BaseCommand):
                     m = MutualFund.objects.get(amfisymbol=field_list[0])
                     print('%s: %s, %s' % (m.mfname, field_list[3], field_list[-1].strip()))
                     t = time.strptime(field_list[-1].strip(), '%d-%b-%Y')
-                    entry = m.mutualfundnav_set.get_or_create(nav=decimal.Decimal(field_list[3]),
-                                                              date=datetime.date.fromtimestamp(time.mktime(t)))[0]
+                    entry = None
+                    try:
+                        entry = m.mutualfundnav_set.get_or_create(nav=decimal.Decimal(field_list[3]),
+                                                                  date=datetime.date.fromtimestamp(time.mktime(t)))[0]
+                    except:
+                        # Try to delete and replace the entry
+                        obj = m.mutualfundnav_set.filter(date=datetime.date.fromtimestamp(time.mktime(t)))
+                        if obj:
+                            obj.delete()
+                        entry = m.mutualfundnav_set.create(nav=decimal.Decimal(field_list[3]),
+                                                       date=datetime.date.fromtimestamp(time.mktime(t)))
                     entry.save()
             line = u.readline().decode(encoding='ascii')
         u.close()
