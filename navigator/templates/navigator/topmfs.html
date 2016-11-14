@@ -37,12 +37,13 @@
     </head>
     <body>
 	<div class="container">
+        <h1>{{ year_str }} returns</h1>
+        <table class="table table-bordered table-striped">
+            <tr><th>MF</th><th>Return (compounded)</th></tr>
+            {% for mf in mfs %}
+            <tr><td>{{ mf.mfname }}</td><td>{{ mf.value|floatformat:2 }}</td></tr>
+            {% endfor %}
+        </table>
     </div>
-    <table class="table">
-        <tr><th>MF</th><th>Return (compounded)</th></tr>
-        {% for mf in mfs %}
-        <tr><td>{{ mf.mfname }}</td><td>{{ mf.value|floatformat:2 }}</td></tr>
-        {% endfor %}
-    </table>
     </body>
 </html>
