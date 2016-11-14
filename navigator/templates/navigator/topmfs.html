@@ -41,7 +41,7 @@
     <table class="table">
         <tr><th>MF</th><th>Return (compounded)</th></tr>
         {% for mf in mfs %}
-        <tr><td>{{ mf.mfname }}</td><td>{{ mf.value }}</td></tr>
+        <tr><td>{{ mf.mfname }}</td><td>{{ mf.value|floatformat:2 }}</td></tr>
         {% endfor %}
     </table>
     </body>
