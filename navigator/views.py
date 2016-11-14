@@ -116,6 +116,7 @@ class TopMFViewer(BuildableListView,metaclass=abc.ABCMeta):
         for mf in context['object_list']:
             navs = mf.mutualfundnav_set.filter(date__range = (str(last_year), str(today))).order_by('date')
             if len(navs) < 1: continue
+            if navs[0].nav <= 0.0 or navs.last().nav <= 0: continue
             timegap = abs(navs[0].date - navs.last().date)
             # We ensure that the last NAV is close to the number of years from today
             if timegap.days > 365 * self.n - 8:
