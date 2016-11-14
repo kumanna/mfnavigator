@@ -123,7 +123,6 @@ class TopMFViewer(BuildableListView,metaclass=abc.ABCMeta):
                 n_years = float(timegap.days) / 365.00
                 compunded_return = math.exp(math.log(absolute_return) / n_years) - 1.0
                 context['mfs'].append({'mfname' : mf.mfname, 'value' : compunded_return * 100})
-                print((mf.mfname, navs.last().nav, navs.last().date, navs[0].nav, navs[0].date))
         if len(context['mfs']) > 10:
             context['mfs'] = sorted(context['mfs'], key=lambda x : x['value'], reverse=True)[:20]
         return context
