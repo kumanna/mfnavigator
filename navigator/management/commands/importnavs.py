@@ -31,7 +31,7 @@ class Command(BaseCommand):
             field_list = navline.split(';')
             print('%s, %s' % (field_list[3], field_list[-1].strip()))
             t = time.strptime(field_list[-1].strip(), '%d-%b-%Y')
-            entry = m.mutualfundnav_set.get_or_create(nav=decimal.Decimal(field_list[3]),
+            entry = m.mutualfundnav_set.get_or_create(nav=decimal.Decimal(field_list[2]),
                                                       date=datetime.date.fromtimestamp(time.mktime(t)))[0]
             entry.save()
         m.save()
