@@ -137,6 +137,9 @@ BAKERY_VIEWS = ('navigator.views.AMCListView',
 				'navigator.views.Last7YearViewer',
 				'navigator.views.Last10YearStaticJSONView',
 				'navigator.views.Last10YearViewer',
-                'navigator.views.TopMF1YearViewer'
+                'navigator.views.TopMF1YearViewer',
+                'navigator.views.TopMF3YearViewer',
+                'navigator.views.TopMF5YearViewer',
+                'navigator.views.TopMF7YearViewer'
 )
 BUILD_DIR = BASE_DIR + '/bakery-build'

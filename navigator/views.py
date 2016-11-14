@@ -125,7 +125,17 @@ class TopMFViewer(BuildableListView,metaclass=abc.ABCMeta):
                 context['mfs'].append({'mfname' : mf.mfname, 'value' : compunded_return * 100})
         if len(context['mfs']) > 10:
             context['mfs'] = sorted(context['mfs'], key=lambda x : x['value'], reverse=True)[:20]
+        context['year_str'] = '1 year' if self.n == 1 else ("%d years" % self.n)
         return context
 
 class TopMF1YearViewer(TopMFViewer):
     n = 1
+
+class TopMF3YearViewer(TopMFViewer):
+    n = 3
+
+class TopMF5YearViewer(TopMFViewer):
+    n = 5
+
+class TopMF7YearViewer(TopMFViewer):
+    n = 7
