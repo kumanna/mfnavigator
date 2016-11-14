@@ -2,7 +2,7 @@ from django.shortcuts import render
 from bakery.views import BuildableDetailView, BuildableListView
 from .models import AMC, MutualFund, MutualFundStaticJSON
 import os, mfnavigator.settings, abc
-import datetime
+import datetime, math
 
 # Create your views here.
 class AMCListView(BuildableListView):
@@ -111,12 +111,18 @@ class TopMFViewer(BuildableListView,metaclass=abc.ABCMeta):
     def get_context_data(self, **kwargs):
         context = super(TopMFViewer, self).get_context_data(**kwargs)
         today = datetime.date.today()
+        last_year = today - datetime.timedelta(days=366*self.n)
         context['mfs'] = []
-        last_year = today - datetime.timedelta(days=365*self.n)
         for mf in context['object_list']:
-            if len(navs) > 0:
-                print((navs[0].nav, navs.last().nav))
-                context['mfs'].append({'mfname' : mf.mfname, 'value' : navs[0].nav / navs.last().nav})
+            navs = mf.mutualfundnav_set.filter(date__range = (str(last_year), str(today))).order_by('date')
+            if len(navs) < 1: continue
+            timegap = abs(navs[0].date - navs.last().date)
+            # We ensure that the last NAV is close to the number of years from today
+            if timegap.days > 365 * self.n - 8:
+                absolute_return = float(navs.last().nav / navs[0].nav)
+                n_years = float(timegap.days) / 365.00
+                compunded_return = math.exp(math.log(absolute_return) / n_years) - 1.0
+                context['mfs'].append({'mfname' : mf.mfname, 'value' : "%.2f" % (compunded_return * 100)})
         return context
 
 class TopMF1YearViewer(TopMFViewer):
